@@ -63,8 +63,8 @@ Foodgram — онлайн-сервис позволяющий обмениват
     
     SECRET_KEY=<django_secret_key>
     ```
-3. В теменале, в корне проекта выполнить команду `docker compose up -d`
-4. Вполнить миграции, собрать статику и загрузить ингридиенты в BD:
+3. В терминале, в корне проекта выполнить команду `docker compose up -d`
+4. Выполнить миграции, собрать статику и загрузить ингридиенты в BD:
      ```
      docker exec backend python manage.py migrate
      docker compose exec backend python manage.py collectstatic

@@ -1,22 +1,25 @@
+from colorfield.fields import ColorField
 from django.core.validators import MinValueValidator
 from django.db import models
 from users.models import User
+
+from foodgram.settings import RECIPE_MAX_FIELD_LENGTH
 
 
 class Tag(models.Model):
     """Модель для тега."""
     name = models.CharField(
-        max_length=200,
+        max_length=RECIPE_MAX_FIELD_LENGTH,
         unique=True,
         verbose_name='Название тега'
     )
-    color = models.CharField(
-        max_length=7,
+    color = ColorField(
+        format='hex',
         unique=True,
         verbose_name='Цвет тега'
     )
     slug = models.SlugField(
-        max_length=200,
+        max_length=RECIPE_MAX_FIELD_LENGTH,
         unique=True,
         verbose_name='URL'
     )
@@ -33,11 +36,11 @@ class Tag(models.Model):
 class Ingredient(models.Model):
     """Модель для ингредиента."""
     name = models.CharField(
-        max_length=200,
+        max_length=RECIPE_MAX_FIELD_LENGTH,
         verbose_name='Название ингредиента'
     )
     measurement_unit = models.CharField(
-        max_length=200,
+        max_length=RECIPE_MAX_FIELD_LENGTH,
         verbose_name='Единица измерения'
     )
 
@@ -66,7 +69,7 @@ class Recipe(models.Model):
     )
     name = models.CharField(
         verbose_name='Название рецепта',
-        max_length=200
+        max_length=RECIPE_MAX_FIELD_LENGTH
     )
     author = models.ForeignKey(
         User,

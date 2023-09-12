@@ -2,9 +2,9 @@ from django.db import transaction
 from djoser.serializers import UserCreateSerializer, UserSerializer
 from drf_extra_fields.fields import Base64ImageField
 from recipes.models import (Favorite, Ingredient, Recipe, RecipeIngredient,
-                            ShoppingCart, Tag)
+                            ShoppingCart, Tag, )
 from rest_framework import serializers
-from users.models import User
+from users.models import User, Follow
 
 
 class CustomUserCreateSerializer(UserCreateSerializer):
@@ -40,9 +40,8 @@ class CustomUserSerializer(UserSerializer):
     def get_is_subscribed(self, obj):
         """Проверка подписки на автора."""
         user = self.context.get('request').user
-        if user.is_anonymous:
-            return False
-        return user.follower.filter(author=obj).exists()
+        return (user.is_authenticated
+                and user.follower.filter(author=obj).exists())
 
 
 class SubscriptionSerializer(serializers.ModelSerializer):
@@ -65,6 +64,19 @@ class SubscriptionSerializer(serializers.ModelSerializer):
         )
         read_only_fields = fields
 
+    def validate(self, data):
+        user = self.context.get('request').user
+        author = self.instance
+        if user == author:
+            raise serializers.ValidationError(
+                'Нельзя подписаться на самого себя'
+            )
+        if Follow.objects.filter(user=user, author=author).exists():
+            raise serializers.ValidationError(
+                'Вы уже подписаны на этого автора'
+            )
+        return data
+
     def get_is_subscribed(self, obj):
         """
         Проверка подписки на автора.
@@ -85,9 +97,6 @@ class SubscriptionSerializer(serializers.ModelSerializer):
     def get_recipes_count(self, obj):
         """Получить количество рецептов автора."""
         return obj.recipes.count()
-
-
-# ---------------------------------------------------------------------------
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -165,15 +174,13 @@ class RecipeReadSerializer(serializers.ModelSerializer):
 
     def get_is_favorited(self, recipe):
         user = self.context.get('request').user
-        if user.is_anonymous:
-            return False
-        return user.favorites.filter(recipe=recipe).exists()
+        return (user.is_authenticated
+                and user.favorites.filter(recipe=recipe).exists())
 
     def get_is_in_shopping_cart(self, recipe):
         user = self.context.get('request').user
-        if user.is_anonymous:
-            return False
-        return user.shopping_cart.filter(recipe=recipe).exists()
+        return (user.is_authenticated
+                and user.shopping_cart.filter(recipe=recipe).exists())
 
 
 class RecipeCreateSerializer(serializers.ModelSerializer):
@@ -218,7 +225,8 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
             )
         return value
 
-    def add_ingredients(self, ingredients, recipe):
+    @staticmethod
+    def add_ingredients(ingredients, recipe):
         """Добавить ингредиенты в рецепт."""
         ingredient_list = []
         for ingredient in ingredients:
@@ -257,9 +265,6 @@ class RecipeCreateSerializer(serializers.ModelSerializer):
         return RecipeReadSerializer(
             recipe, context={'request': self.context.get('request')}
         ).data
-
-
-# ---------------------------------------------------------------------------
 
 
 class ShoppingCartSerializer(serializers.ModelSerializer):

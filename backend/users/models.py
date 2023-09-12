@@ -3,17 +3,19 @@ from django.core.validators import EmailValidator
 from django.db import models
 from users.validators import validate_username
 
+from foodgram.settings import USER_MAX_FIELD_LENGTH, EMAIL_MAX_LENGTH
+
 
 class User(AbstractUser):
     """Модель пользователя"""
     email = models.EmailField(
-        max_length=254,
+        max_length=EMAIL_MAX_LENGTH,
         unique=True,
         verbose_name='Адрес электронной почты',
         validators=(EmailValidator,)
     )
     username = models.CharField(
-        max_length=150,
+        max_length=USER_MAX_FIELD_LENGTH,
         unique=True,
         verbose_name='Логин пользователя',
         validators=(validate_username,)
@@ -21,12 +23,12 @@ class User(AbstractUser):
 
     first_name = models.CharField(
         blank=False,
-        max_length=150,
+        max_length=USER_MAX_FIELD_LENGTH,
         verbose_name='Имя'
     )
     last_name = models.CharField(
         blank=False,
-        max_length=150,
+        max_length=USER_MAX_FIELD_LENGTH,
         verbose_name='Фамилия'
     )
 

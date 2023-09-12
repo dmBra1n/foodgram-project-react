@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'recipes.apps.RecipesConfig',
     'users.apps.UsersConfig',
     'api.apps.ApiConfig',
+    'colorfield'
 ]
 
 MIDDLEWARE = [
@@ -133,3 +134,7 @@ DJOSER = {
         'user_list': ['rest_framework.permissions.AllowAny'],
     },
 }
+
+USER_MAX_FIELD_LENGTH = 150
+EMAIL_MAX_LENGTH = 254
+RECIPE_MAX_FIELD_LENGTH = 200
