@@ -3,9 +3,9 @@ from api.mixins import ListRetrieveViewSet
 from api.pagination import PageNumPagination
 from api.permissions import IsAdminOrAuthorOrReadOnly
 from api.serializers import (IngredientSerializer, RecipeCreateSerializer,
-                             RecipeReadSerializer,
-                             RecipeShortSerializer, SubscriptionSerializer,
-                             TagSerializer)
+                             RecipeReadSerializer, RecipeShortSerializer,
+                             SubscriptionSerializer, TagSerializer)
+from api.utils import shopping_cart_file
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 from recipes.models import Favorite, Ingredient, Recipe, ShoppingCart, Tag
@@ -16,7 +16,6 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from users.models import Follow, User
-from api.utils import shopping_cart_file
 
 
 class FollowUserView(APIView):

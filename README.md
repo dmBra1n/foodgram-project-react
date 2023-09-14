@@ -1,4 +1,7 @@
 # Продуктовый помощник Foodgram
+
+![](https://github.com/dmBra1n/foodgram-project-react/actions/workflows/main.yml/badge.svg)
+
 ## О проекте
 Foodgram — онлайн-сервис позволяющий обмениваться рецептами любимых блюд.<br>
 Проект состоит из бэкенд-приложения на Django и фронтенд-приложения на React.
