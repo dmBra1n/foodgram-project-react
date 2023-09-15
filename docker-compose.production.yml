@@ -29,7 +29,7 @@ services:
     volumes:
       - static:/static
   gateway:
-    container_name: nginx_prod
+    container_name: foodgram_nginx_prod
     image: ${GATEWAY_TAG}
     env_file: .env
     ports:
