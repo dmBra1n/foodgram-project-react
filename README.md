@@ -1,31 +1,27 @@
 # Продуктовый помощник Foodgram
-```
-Cайт https://foodgramstudy.zapto.org/
-Документация https://foodgramstudy.zapto.org/api/docs/redoc.html
-Админ:  
-почта - qwer@qwer.qwer
-пароль - admin
-```
-
 ![badge](https://github.com/dmBra1n/foodgram-project-react/actions/workflows/main.yml/badge.svg)
 ## О проекте
 Foodgram — онлайн-сервис позволяющий обмениваться рецептами любимых блюд.<br>
-Проект состоит из бэкенд-приложения на Django и фронтенд-приложения на React.
+Проект состоит из backend-приложения на Django и fronend-приложения на React.
 
 Проект написан в рамках учебного курса "Python-разработчик" от Yandex.Practicum.<br>
-Основные задачи были:
-- реализовать backend на django
-- развернуть frontend и backend на облачном сервере используя Docker
-- настроить GitHub Actions
+Что было сделано в ходе работы над проектом:
+- настроено взаимодействие Python-приложения с внешними API-сервисами;
+- создан собственный API-сервис на базе проекта Django;
+- подключено SPA к бэкенду на Django через API;
+- созданы образы и запущены контейнеры Docker;
+- закреплены на практике основы DevOps, включая CI&CD.
 
-#### Технологии в проекте
+#### Инструменты и стек:
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=flat-square&logo=python&logoColor=ffdd54)
-![DjangoREST](https://img.shields.io/badge/django-REST-ff1709?style=flat-square&logo=django&logoColor=white&color=f1c552&labelColor=%230c4b33)
-![Django](https://img.shields.io/badge/django-%230c4b33.svg?style=flat-square&logo=django&logoColor=white)
-![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat-square&logo=docker&logoColor=white)
-![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=flat-square&logo=nginx&logoColor=white)
+![DjangoREST](https://img.shields.io/badge/DJANGO-REST-ff1709?style=flat-square&logo=django&logoColor=white&color=ff1709&labelColor=gray)
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=flat-square&logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=flat-square&logo=docker&logoColor=white) 
+![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=flat-square&logo=nginx&logoColor=white) <br>
+![Gunicorn](https://img.shields.io/badge/gunicorn-%298729.svg?style=flat-square&logo=gunicorn&logoColor=white) 
+![Postman](https://img.shields.io/badge/Postman-FF6C37?style=flat-square&logo=postman&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-black?style=flat-square&logo=JSON%20web%20tokens)
 ![Actions GitHub](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=flat-square&logo=githubactions&logoColor=white)
 
 ## Реализован  функционал:
