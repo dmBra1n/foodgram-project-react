@@ -75,7 +75,7 @@ Foodgram — онлайн-сервис позволяющий обмениват
 3. В терминале, в корне проекта выполнить команду `docker compose up -d`
 4. Выполнить миграции, собрать статику и загрузить ингридиенты в BD:
      ```
-     docker exec backend python manage.py migrate
+     docker compose exec backend python manage.py migrate
      docker compose exec backend python manage.py collectstatic
      docker compose exec backend cp -r /app/collected_static/. /backend_static/static/
      docker compose exec backend python manage.py load_ingredients  
